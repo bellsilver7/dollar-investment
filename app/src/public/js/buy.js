@@ -18,5 +18,11 @@ function buy() {
     totalPrice: totalPriceInput.value,
   };
 
-  console.log(req);
+  fetch("/buy", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(req),
+  });
 }

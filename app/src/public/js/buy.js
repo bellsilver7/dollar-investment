@@ -13,9 +13,9 @@ amountInput.addEventListener("keyup", (e) => {
 buyBtn.addEventListener("click", buy);
 function buy() {
   const req = {
-    currentPrice: currentPrice,
-    amount: amountInput.value,
-    totalPrice: totalPriceInput.value,
+    currentPrice: parseInt(currentPrice),
+    amount: parseInt(amountInput.value),
+    totalPrice: parseInt(totalPriceInput.value),
   };
 
   fetch("/buy", {

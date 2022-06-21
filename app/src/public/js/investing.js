@@ -18,7 +18,7 @@ function buy() {
     totalPrice: parseInt(totalPriceInput.value),
   };
 
-  fetch("/buy", {
+  fetch("/investing/buy", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

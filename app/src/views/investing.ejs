@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/js/investing.js" defer></script>
+  </head>
+  <body>
+    <main class="font-mono bg-white relative overflow-hidden h-screen">
+      <div class="flex relative z-20 items-center">
+        <div
+          class="container mx-auto px-6 flex flex-col justify-between items-center relative py-4"
+        >
+          <div class="flex flex-col">
+            <div class="flex items-center justify-center mt-4">
+              현재 환율 : <span id="pricePerDollar"></span>(<span
+                id="datetime"
+              ></span
+              >)
+            </div>
+            <div class="flex items-center justify-center mt-4">
+              <input
+                type="text"
+                class="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                id="amount"
+                placeholder="구매수량"
+              />
+            </div>
+            <div class="flex items-center justify-center mt-4">
+              <input
+                type="text"
+                class="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                id="totalPrice"
+                disabled
+              />
+            </div>
+            <div class="flex items-center justify-center mt-4">
+              <button
+                type="button"
+                class="py-2 px-4 bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
+                id="buyBtn"
+              >
+                사기
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

@@ -11,6 +11,9 @@ const registerBtn = document.querySelector("#register-btn");
 registerBtn.addEventListener("click", register);
 
 function register() {
+  if (!userIdInput.value) {
+    return alert("아이디를 입력해주세요.");
+  }
   if (userPasswordInput.value !== userPasswordConfirmInput.value) {
     return alert("비밀번호가 일치하지 않습니다.");
   }

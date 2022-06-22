@@ -8,16 +8,21 @@ class User {
   }
 
   login() {
-    const body = this.body;
-    const { id, password } = UserStorage.getUserInfo(body.userId);
+    const client = this.body;
+    const { id, password } = UserStorage.getUserInfo(client.userId);
 
     if (id) {
-      if (id === body.userId && password === body.userPassword) {
+      if (id === client.userId && password === client.userPassword) {
         return { success: true };
       }
       return { success: false, message: "잘못된 비밀번호에요." };
     }
     return { success: false, message: "존재하지 않는 아이디에요." };
+  }
+
+  register() {
+    const client = this.body;
+    UserStorage.save(client);
   }
 }
 

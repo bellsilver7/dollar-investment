@@ -1,5 +1,5 @@
 {
-  "id": ["bellsilver7", "David", "Peter"],
-  "password": ["1234", "5678", "3456"],
-  "name": ["아무개", "홍길동", "개똥이"]
+  "id": ["bellsilver7", "David", "Peter", "user1", "user1", "user1", "달러"],
+  "password": ["1234", "5678", "3456", "1234", "1234", "1234", "1234"],
+  "name": ["아무개", "홍길동", "개똥이", "userName", "userName", "", "투자"]
 }

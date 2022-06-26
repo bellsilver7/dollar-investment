@@ -10,6 +10,30 @@ amountInput.addEventListener("keyup", (e) => {
   document.querySelector("#totalPrice").value = amount * currentPrice;
 });
 
+function exchangeRate() {
+  fetch("/investing/exchange-rate", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      console.log(res);
+      if (res.success) {
+        location.reload();
+      } else {
+        if (res.error) return alert("에러발생!");
+        alert(res.message);
+      }
+    })
+    .catch((error) => {
+      return Error("환율 조회 중 오류 발생");
+    });
+}
+
+exchangeRate();
+
 buyBtn.addEventListener("click", buy);
 function buy() {
   const req = {

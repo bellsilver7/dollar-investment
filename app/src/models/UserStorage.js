@@ -5,23 +5,23 @@ const db = require("../config/db");
 class UserStorage {
   static getUserInfo(id) {
     return new Promise((resolve, reject) => {
-      const query = "select * from users where id = ?;";
+      const query = "select * from abc where id = ?;";
       db.query(query, [id], (error, data) => {
-        if (error) reject(`${error}`);
-        resolve(data[0]);
+        if (error) return reject(`${error}`);
+        return resolve(data[0]);
       });
     });
   }
 
   static async save(userInfo) {
     return new Promise((resolve, reject) => {
-      const query = "insert into users(id, name, password) values(?, ?, ?); ";
+      const query = "insert into abc(id, name, password) values(?, ?, ?); ";
       db.query(
         query,
         [userInfo.id, userInfo.name, userInfo.password],
         (error) => {
-          if (error) reject(`${error}`);
-          resolve({ success: true });
+          if (error) return reject(`${error}`);
+          return resolve({ success: true });
         }
       );
     });

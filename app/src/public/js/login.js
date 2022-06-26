@@ -7,6 +7,12 @@ const loginBtn = document.querySelector("#login-btn");
 loginBtn.addEventListener("click", login);
 
 function login() {
+  if (!userIdInput.value) {
+    return alert("아이디를 입력해주세요.");
+  }
+  if (!userPasswordInput.value) {
+    return alert("비밀번호를 입력해주세요.");
+  }
   const req = {
     userId: userIdInput.value,
     userPassword: userPasswordInput.value,
@@ -24,6 +30,7 @@ function login() {
       if (res.success) {
         location.href = "/";
       } else {
+        if (res.error) return alert("에러발생!");
         alert(res.message);
       }
     })

@@ -36,6 +36,7 @@ function register() {
       if (res.success) {
         location.href = "/";
       } else {
+        if (res.error) return alert("에러발생!");
         alert(res.message);
       }
     })

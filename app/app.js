@@ -11,9 +11,6 @@ dotenv.config();
 // 라우팅
 const route = require("./src/routes");
 
-const logger = require("./src/config/logger");
-logger.error("Hello Logger");
-
 app.set("views", "./src/views");
 app.set("view engine", "ejs");
 app.use(express.static(`${__dirname}/src/public`));

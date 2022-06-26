@@ -18,29 +18,39 @@ const process = {
   login: async (req, res) => {
     const user = new User(req.body);
     const response = await user.login();
-    if (response.error)
-      logger.error(
-        `POST /login 200 Response: "success: ${response.success}, message: ${response.error}"`
-      );
-    else
-      logger.info(
-        `POST /login 200 Response: "success: ${response.success}, message: ${response.message}"`
-      );
-    return res.json(response);
+    const url = {
+      method: "POST",
+      path: "/login",
+      status: response.error ? 400 : 200,
+    };
+    log(response, url);
+    return res.status(url.status).json(response);
   },
   register: async (req, res) => {
     const user = new User(req.body);
     const response = await user.register();
-    if (response.error)
-      logger.error(
-        `POST /register 200 Response: "success: ${response.success}, message: ${response.error}"`
-      );
-    else
-      logger.info(
-        `POST /register 200 Response: "success: ${response.success}, message: ${response.message}"`
-      );
-    return res.json(response);
+    const url = {
+      method: "POST",
+      path: "/register",
+      status: response.error ? 400 : 201,
+    };
+    log(response, url);
+    return res.status(url.status).json(response);
   },
+};
+
+const log = (response, url) => {
+  if (response.error) {
+    logger.error(
+      `${url.method} ${url.path} ${url.status} Response: "${response.success} ${response.error}"`
+    );
+  } else {
+    logger.info(
+      `${url.method} ${url.path} ${url.status} Response: "${response.success} ${
+        response.message || ""
+      }"`
+    );
+  }
 };
 
 module.exports = {

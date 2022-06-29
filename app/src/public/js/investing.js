@@ -1,13 +1,17 @@
 "use strict";
 
-let currentPrice = 1300;
+const currentPrice = document
+  .querySelector("#current-price")
+  .textContent.replace(",", "");
 const amountInput = document.querySelector("#amount");
 const totalPriceInput = document.querySelector("#amount");
 const buyBtn = document.querySelector("#buyBtn");
 
 amountInput.addEventListener("keyup", (e) => {
   const amount = e.target.value;
-  document.querySelector("#totalPrice").value = amount * currentPrice;
+  document.querySelector("#totalPrice").value = Math.ceil(
+    amount * currentPrice
+  );
 });
 
 function exchangeRate() {
@@ -19,9 +23,8 @@ function exchangeRate() {
   })
     .then((res) => res.json())
     .then((res) => {
-      console.log(res);
       if (res.success) {
-        location.reload();
+        // location.reload();
       } else {
         if (res.error) return alert("에러발생!");
         alert(res.message);
@@ -32,7 +35,7 @@ function exchangeRate() {
     });
 }
 
-exchangeRate();
+// exchangeRate();
 
 buyBtn.addEventListener("click", buy);
 function buy() {

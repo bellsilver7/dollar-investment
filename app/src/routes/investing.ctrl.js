@@ -2,32 +2,36 @@
 
 const logger = require("../config/logger");
 const ExchangeRate = require("../models/ExchangeRate");
+const moment = require("moment");
+
+const avaliableSearchDate = () => {
+  // 비영업일의 데이터, 혹은 영업당일 11시 이전에 해당일의 데이터를 요청할 경우 null 값이 반환
+  const format = "YYYYMMDD";
+  if (
+    moment().format("h") < 11 ||
+    moment().format("dddd") === "토요일" ||
+    moment().format("dddd") === "일요일"
+  ) {
+    return moment().add("-1", "days").format(format);
+  }
+  return moment().format(format);
+};
 
 const output = {
-  page: (req, res) => {
+  page: async (req, res) => {
+    const searchDate = avaliableSearchDate();
+    const request = { searchDate: searchDate };
+    const exchangeRate = new ExchangeRate(request);
+    const response = await exchangeRate.get(request);
     logger.info(`GET /investing 200 "투자 화면으로 이동"`);
-    res.render("investing");
+    response.data.searchDate = searchDate;
+    console.log(Object.assign(response.data, request));
+    res.render("investing", response);
   },
   exchangeRate: async (req, res) => {
-    const info = await ExchangeRate.get();
-    console.log(info.data);
-
-    // {
-    //   result: 1,
-    //   cur_unit: 'USD',
-    //   ttb: '1,272.05',
-    //   tts: '1,297.74',
-    //   deal_bas_r: '1,284.9',
-    //   bkpr: '1,284',
-    //   yy_efee_r: '0',
-    //   ten_dd_efee_r: '0',
-    //   kftc_bkpr: '1,284',
-    //   kftc_deal_bas_r: '1,284.9',
-    //   cur_nm: '미국 달러'
-    // }
-
+    // const response = await ExchangeRate.get();
     logger.info(`GET /investing/exchange-rate 200 "환율 정보 조회"`);
-    return res;
+    return res.status(200).json(response);
   },
 };
 

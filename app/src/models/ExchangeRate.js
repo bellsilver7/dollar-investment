@@ -1,16 +1,20 @@
 "use strict";
 
 const axios = require("axios");
-const moment = require("moment");
 
 class ExchangeRate {
-  static async get() {
+  constructor(body) {
+    this.body = body;
+  }
+
+  async get() {
+    const client = this.body;
     const API_URL =
       "https://www.koreaexim.go.kr/site/program/financial/exchangeJSON";
     const EXCHANGE_INFO_CODE = "AP01";
     const DOLLAR_CODE = "USD";
     try {
-      const searchDate = moment().format("YYYYMMDD");
+      const searchDate = client.searchDate;
       const info = await axios({
         method: "GET",
         url:

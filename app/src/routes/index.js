@@ -9,9 +9,8 @@ const userCtrl = require("./user.ctrl");
 
 router.get("/", homeCtrl.output.home);
 
-router.get("/investing", investingCtrl.output.page);
-router.get("/investing/exchange-rate", investingCtrl.output.exchangeRate);
-router.post("/investing", investingCtrl.process.buy);
+router.get("/investing", investingCtrl.output.buy);
+router.post("/investing/buy", investingCtrl.process.buy);
 
 router.get("/login", userCtrl.output.login);
 router.post("/login", userCtrl.process.login);

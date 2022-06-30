@@ -2,6 +2,7 @@
 
 const logger = require("../config/logger");
 const ExchangeRate = require("../models/ExchangeRate");
+const Investment = require("../models/Investment");
 const moment = require("moment");
 
 const avaliableSearchDate = () => {
@@ -18,27 +19,43 @@ const avaliableSearchDate = () => {
 };
 
 const output = {
-  page: async (req, res) => {
+  buy: async (req, res) => {
     const searchDate = avaliableSearchDate();
     const request = { searchDate: searchDate };
     const exchangeRate = new ExchangeRate(request);
     const response = await exchangeRate.get(request);
     logger.info(`GET /investing 200 "투자 화면으로 이동"`);
     response.data.searchDate = searchDate;
-    console.log(Object.assign(response.data, request));
     res.render("investing", response);
-  },
-  exchangeRate: async (req, res) => {
-    // const response = await ExchangeRate.get();
-    logger.info(`GET /investing/exchange-rate 200 "환율 정보 조회"`);
-    return res.status(200).json(response);
   },
 };
 
 const process = {
-  buy: (req, res) => {
-    console.log(req.body);
+  buy: async (req, res) => {
+    const investment = new Investment(req.body);
+    const response = await investment.buy();
+    const url = {
+      method: "POST",
+      path: "/investment/buy",
+      status: response.error ? 400 : 200,
+    };
+    log(response, url);
+    return { success: true, message: "구매했습니다." };
   },
+};
+
+const log = (response, url) => {
+  if (response.error) {
+    logger.error(
+      `${url.method} ${url.path} ${url.status} Response: "${response.success} ${response.error}"`
+    );
+  } else {
+    logger.info(
+      `${url.method} ${url.path} ${url.status} Response: "${response.success} ${
+        response.message || ""
+      }"`
+    );
+  }
 };
 
 module.exports = {

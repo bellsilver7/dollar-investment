@@ -4,45 +4,24 @@ const currentPrice = document
   .querySelector("#current-price")
   .textContent.replace(",", "");
 const amountInput = document.querySelector("#amount");
-const totalPriceInput = document.querySelector("#amount");
-const buyBtn = document.querySelector("#buyBtn");
+const totalPriceInput = document.querySelector("#total-price");
+const buyBtn = document.querySelector("#buy-btn");
 
 amountInput.addEventListener("keyup", (e) => {
   const amount = e.target.value;
-  document.querySelector("#totalPrice").value = Math.ceil(
-    amount * currentPrice
-  );
+  totalPriceInput.value = Math.ceil(currentPrice) * amount;
 });
 
-function exchangeRate() {
-  fetch("/investing/exchange-rate", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then((res) => res.json())
-    .then((res) => {
-      if (res.success) {
-        // location.reload();
-      } else {
-        if (res.error) return alert("에러발생!");
-        alert(res.message);
-      }
-    })
-    .catch((error) => {
-      return Error("환율 조회 중 오류 발생");
-    });
-}
-
-// exchangeRate();
-
 buyBtn.addEventListener("click", buy);
+
 function buy() {
+  if (!amountInput.value) {
+    return alert("수량을 입력해주세요.");
+  }
+
   const req = {
-    currentPrice: parseInt(currentPrice),
+    price: parseInt(currentPrice),
     amount: parseInt(amountInput.value),
-    totalPrice: parseInt(totalPriceInput.value),
   };
 
   fetch("/investing/buy", {
@@ -51,5 +30,22 @@ function buy() {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(req),
-  });
+  })
+    .then((res) => {
+      console.log(res);
+      res.json();
+    })
+    .then((res) => {
+      console.log("response");
+      if (res.success) {
+        alert("구매 성공");
+        location.reload();
+      } else {
+        if (res.error) return alert("에러발생!");
+        alert(res.message);
+      }
+    })
+    .catch((error) => {
+      console.error(new Error("구매 중 오류 발생"));
+    });
 }

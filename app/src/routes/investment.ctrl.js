@@ -19,6 +19,9 @@ const avaliableSearchDate = () => {
 };
 
 const output = {
+  index: (req, res) => {
+    res.render("investment/index");
+  },
   buy: async (req, res) => {
     const searchDate = avaliableSearchDate();
     const request = { searchDate: searchDate };
@@ -26,7 +29,7 @@ const output = {
     const response = await exchangeRate.get(request);
     logger.info(`GET /investing 200 "투자 화면으로 이동"`);
     response.data.searchDate = searchDate;
-    res.render("investing", response);
+    res.render("investment/buy", response);
   },
 };
 

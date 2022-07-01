@@ -4,13 +4,14 @@ const express = require("express");
 const router = express.Router();
 
 const homeCtrl = require("./home.ctrl");
-const investingCtrl = require("./investing.ctrl");
+const investmentCtrl = require("./investment.ctrl");
 const userCtrl = require("./user.ctrl");
 
 router.get("/", homeCtrl.output.home);
 
-router.get("/investing", investingCtrl.output.buy);
-router.post("/investing/buy", investingCtrl.process.buy);
+router.get("/investment", investmentCtrl.output.index);
+router.get("/investment/buy", investmentCtrl.output.buy);
+router.post("/investment/buy", investmentCtrl.process.buy);
 
 router.get("/login", userCtrl.output.login);
 router.post("/login", userCtrl.process.login);

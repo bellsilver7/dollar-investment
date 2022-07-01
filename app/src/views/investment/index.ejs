@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/js/investment.js" defer></script>
+  </head>
+  <body>
+    <main class="font-mono bg-white relative overflow-hidden h-screen">
+      <div class="flex relative z-20 items-center">
+        <div
+          class="container mx-auto px-6 flex flex-col justify-between items-center relative py-4"
+        >
+          <a
+            href="/investment/buy"
+            class="py-2 px-4 bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
+          >
+            사러가기
+          </a>
+          <table class="min-w-full leading-normal">
+            <thead>
+              <tr>
+                <th
+                  class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"
+                >
+                  날짜
+                </th>
+                <th
+                  class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"
+                >
+                  환율
+                </th>
+                <th
+                  class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"
+                >
+                  수량
+                </th>
+                <th
+                  class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"
+                >
+                  (예상)수익율
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td
+                  class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
+                ></td>
+                <td
+                  class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
+                ></td>
+                <td
+                  class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
+                ></td>
+                <td
+                  class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
+                ></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

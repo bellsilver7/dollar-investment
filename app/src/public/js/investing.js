@@ -31,12 +31,8 @@ function buy() {
     },
     body: JSON.stringify(req),
   })
+    .then((res) => res.json())
     .then((res) => {
-      console.log(res);
-      res.json();
-    })
-    .then((res) => {
-      console.log("response");
       if (res.success) {
         alert("구매 성공");
         location.reload();

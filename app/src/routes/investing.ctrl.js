@@ -9,7 +9,7 @@ const avaliableSearchDate = () => {
   // 비영업일의 데이터, 혹은 영업당일 11시 이전에 해당일의 데이터를 요청할 경우 null 값이 반환
   const format = "YYYYMMDD";
   if (
-    moment().format("h") < 11 ||
+    moment().format("H") < 11 ||
     moment().format("dddd") === "토요일" ||
     moment().format("dddd") === "일요일"
   ) {
@@ -40,7 +40,7 @@ const process = {
       status: response.error ? 400 : 200,
     };
     log(response, url);
-    return { success: true, message: "구매했습니다." };
+    return res.status(url.status).json(response);
   },
 };
 

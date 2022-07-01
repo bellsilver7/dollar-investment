@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="/js/investment.js" defer></script>
+    <!-- <script src="/js/investment.js" defer></script> -->
   </head>
   <body>
     <main class="font-mono bg-white relative overflow-hidden h-screen">
@@ -46,20 +46,25 @@
               </tr>
             </thead>
             <tbody>
+              <% list.forEach((item) => { %>
               <tr>
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                  <%= item.created_at.toLocaleDateString() %>
+                </td>
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                  <%= item.price %>
+                </td>
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                  <%= item.amount %>
+                </td>
                 <td
-                  class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
-                ></td>
-                <td
-                  class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
-                ></td>
-                <td
-                  class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
-                ></td>
-                <td
-                  class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
-                ></td>
+                  class="px-5 py-5 border-b border-gray-200 bg-white text-sm<% if (currentPrice - item.price < 0) { %> text-blue-400<% } else if (currentPrice - item.price > 0) { %> text-red-400<% } %>"
+                >
+                  <%= Math.ceil(((currentPrice - item.price) / currentPrice) *
+                  100) %>%
+                </td>
               </tr>
+              <% }) %>
             </tbody>
           </table>
         </div>

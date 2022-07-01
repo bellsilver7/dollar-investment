@@ -19,15 +19,28 @@ const avaliableSearchDate = () => {
 };
 
 const output = {
-  index: (req, res) => {
-    res.render("investment/index");
+  index: async (req, res) => {
+    const searchDate = avaliableSearchDate();
+    const request = { searchDate: searchDate };
+    const exchangeRate = new ExchangeRate(request);
+    const exchangeRateInfo = await exchangeRate.get(request);
+
+    const investment = new Investment();
+    const investmentInfo = await investment.get();
+    logger.info(
+      `GET /investment 200 "투자 화면으로 이동" ${exchangeRateInfo.data.bkpr}`
+    );
+    res.render("investment/index", {
+      list: investmentInfo,
+      currentPrice: exchangeRateInfo.data.bkpr.replace(",", ""),
+    });
   },
   buy: async (req, res) => {
     const searchDate = avaliableSearchDate();
     const request = { searchDate: searchDate };
     const exchangeRate = new ExchangeRate(request);
     const response = await exchangeRate.get(request);
-    logger.info(`GET /investing 200 "투자 화면으로 이동"`);
+    logger.info(`GET /investment/buy 200 "달러 구매 화면으로 이동"`);
     response.data.searchDate = searchDate;
     res.render("investment/buy", response);
   },

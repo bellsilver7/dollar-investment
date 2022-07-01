@@ -24,7 +24,7 @@ function buy() {
     amount: parseInt(amountInput.value),
   };
 
-  fetch("/investing/buy", {
+  fetch("/investment/buy", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -35,7 +35,7 @@ function buy() {
     .then((res) => {
       if (res.success) {
         alert("구매 성공");
-        location.reload();
+        location.href = "/investment";
       } else {
         if (res.error) return alert("에러발생!");
         alert(res.message);

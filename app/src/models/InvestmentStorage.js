@@ -1,7 +1,19 @@
 "use strict";
 
 const db = require("../config/db");
+
 class InvestmentStorage {
+  static async get() {
+    return new Promise((resolve, reject) => {
+      const query =
+        "select price, amount, created_at from investments order by created_at desc";
+      db.query(query, [], (error, data) => {
+        if (error) return reject(`${error}`);
+        return resolve(data);
+      });
+    });
+  }
+
   static async save(investmentInfo) {
     return new Promise((resolve, reject) => {
       const query =

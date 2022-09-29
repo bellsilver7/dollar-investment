@@ -105,3 +105,6 @@ dist
 
 # Sqlite local files
 *.sqlite
+
+# Package lock files
+*-lock.json

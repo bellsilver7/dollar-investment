@@ -2,11 +2,25 @@
 
 // 모듈
 const express = require("express");
+const session = require("express-session");
+const MemoryStore = require("memorystore")(session);
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 
 const app = express();
 dotenv.config();
+
+app.use(
+  session({
+    secret: process.env.SECRET_KEY,
+    resave: false,
+    saveUninitialized: true,
+    store: new MemoryStore({
+      checkPeriod: 7200000, // 2 hours (= 2 * 60 * 60 * 1000 ms)
+    }),
+    cookie: { maxAge: 86400000 },
+  })
+);
 
 // 라우팅
 const route = require("./src/routes");

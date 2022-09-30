@@ -23,8 +23,20 @@ const process = {
       path: "/login",
       status: response.error ? 400 : 200,
     };
-    log(response, url);
+
+    console.log("response.data =", response.data);
+    if (response.data) {
+      req.session.user = {
+        id: response.data.id,
+        name: response.data.name,
+      };
+    }
+
     return res.status(url.status).json(response);
+  },
+  logout: async (req, res) => {
+    req.session.user = null;
+    return res.redirect("/");
   },
   register: async (req, res) => {
     const user = new User(req.body);

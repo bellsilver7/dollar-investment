@@ -17,7 +17,7 @@ class User {
           user.id === client.userId &&
           user.password === client.userPassword
         ) {
-          return { success: true };
+          return { success: true, data: { id: user.id, name: user.name } };
         }
         return { success: false, message: "잘못된 비밀번호에요." };
       }

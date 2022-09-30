@@ -16,6 +16,8 @@ router.post("/investment/buy", investmentCtrl.process.buy);
 router.get("/login", userCtrl.output.login);
 router.post("/login", userCtrl.process.login);
 
+router.get("/logout", userCtrl.process.logout);
+
 router.get("/register", userCtrl.output.register);
 router.post("/register", userCtrl.process.register);
 
